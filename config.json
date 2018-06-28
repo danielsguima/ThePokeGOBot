@@ -1,5 +1,5 @@
 {
     "token": "BOT_TOKEN",
-    "master_id": YOUR_ID,
+    "master_id": 123456,
     "language": "en"
 }
