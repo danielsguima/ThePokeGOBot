@@ -46,4 +46,3 @@ It's possible to translate the bot to your own language. To do so, follow this s
 | /gettrainers 	| Master only 	|get the list of users that have set their trainer's information|`/gettrainers`|
 =======
 | /gettrainers 	| Master only 	|get the list of users that have set their trainer's information|`/gettrainers`|
->>>>>>> 288e781ee3a6ff4c389e5ee22bc18b0966c74134
