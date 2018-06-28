@@ -42,4 +42,8 @@ It's possible to translate the bot to your own language. To do so, follow this s
 | /comment     	| All members 	|add informations to a raid's list or quest's report|`/comment q/r raid's/quest's ID comment`|
 | /setraids    	| Master only 	|set the current available raids in the game|`/setraid pkmn_number,pkmn_number`|
 | /getraids    	| Master only 	|get the list of current available raids in the game|`/getraids`|
+<<<<<<< HEAD
 | /gettrainers 	| Master only 	|get the list of users that have set their trainer's information|`/gettrainers`|
+=======
+| /gettrainers 	| Master only 	|get the list of users that have set their trainer's information|`/gettrainers`|
+>>>>>>> 288e781ee3a6ff4c389e5ee22bc18b0966c74134
