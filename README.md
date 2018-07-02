@@ -16,8 +16,8 @@ A Pokémon GO Telegram bot to manage raids and quests.
 - `123456` with your Telegram ID (some commands will only respond to this ID), that can be found by starting a conversation with [this bot](https://telegram.me/getidsbot)
 - `en` with any of the available languages (one of the folder names inside `/locale` directory). *Let it empty ("") or put an unavailable language to set it to the default language (Brazilian Portuguese)*
 
-4. Add the bot to a supergroup and give it administrator rights
-5. Enjoy the bot!
+5. Add the bot to a supergroup and give it administrator rights
+6. Enjoy the bot!
 
 ## Localization
 It's possible to translate the bot to your own language. To do so, follow this steps:
