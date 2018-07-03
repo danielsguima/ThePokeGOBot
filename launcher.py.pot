@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-06-28 11:31-0300\n"
+"POT-Creation-Date: 2018-07-03 12:33-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,259 +22,290 @@ msgstr ""
 msgid "/raid"
 msgstr ""
 
-#: launcher.py:64 launcher.py:200 launcher.py:246 launcher.py:511
-#: launcher.py:526
-msgid "ativa"
+#: launcher.py:64 launcher.py:199 launcher.py:245 launcher.py:508
+#: launcher.py:523
+msgid "active"
 msgstr ""
 
 #: launcher.py:83
-msgid "Miau! O horário deve estar no formato *HH:MM*!"
+msgid "Meowth! The time must be in the format of *HH:MM*!"
 msgstr ""
 
 #: launcher.py:86
 #, python-format
-msgid "Miau! O Pokémon *%s* não aparece em raids atualmente!"
+msgid "Meowth! The Pokémon *%s* is not currently in the raids!"
 msgstr ""
 
 #: launcher.py:89
 #, python-format
-msgid "Miau! *%s* não é um Pokémon válido!"
+msgid "Meowth! *%s* is not a valid Pokémon!"
 msgstr ""
 
 #: launcher.py:92
-msgid "/editar"
+msgid "/edit"
 msgstr ""
 
 #: launcher.py:99 launcher.py:116
 #, python-format
-msgid "Miau! A raid de número *%s* não existe ou já foi finalizada!"
+msgid "Meowth! The raid of id *%s* does not exist or has already ended!"
 msgstr ""
 
 #: launcher.py:108 launcher.py:110
-msgid "/cancelar"
+msgid "/cancel"
 msgstr ""
 
 #: launcher.py:108
-msgid "/finalizar"
+msgid "/end"
 msgstr ""
 
 #: launcher.py:110 launcher.py:120
-msgid "cancelar"
+msgid "cancel"
 msgstr ""
 
 #: launcher.py:110
-msgid "finalizar"
+msgid "end"
 msgstr ""
 
 #: launcher.py:120
-msgid "cancelada"
+msgid "canceled"
 msgstr ""
 
-#: launcher.py:120 launcher.py:419
-msgid "finalizada"
+#: launcher.py:120 launcher.py:416
+msgid "ended"
 msgstr ""
 
 #: launcher.py:125
-msgid "/treinador"
+msgid "/trainer"
 msgstr ""
 
 #: launcher.py:126
-msgid "vermelho"
+msgid "red"
 msgstr ""
 
 #: launcher.py:127
-msgid "azul"
+msgid "blue"
 msgstr ""
 
 #: launcher.py:127
-msgid "amarelo"
+msgid "yellow"
 msgstr ""
 
-#: launcher.py:165
+#: launcher.py:164
 #, python-format
-msgid "Miau! Time *%s* e level *%s* definidos!"
+msgid "Meowth! Team *%s* and level *%s* set!"
 msgstr ""
 
-#: launcher.py:168
-msgid "Miau! Informe um time e level válidos!"
+#: launcher.py:167
+msgid "Meowth! Input a valid team and level!"
 msgstr ""
 
-#: launcher.py:171
+#: launcher.py:170
 msgid "/level"
 msgstr ""
 
-#: launcher.py:181
+#: launcher.py:180
 #, python-format
-msgid "Miau! Seu level foi atualizado para *%s*!"
+msgid "Meowth! Your level was updated to *%s*!"
 msgstr ""
 
-#: launcher.py:184
-msgid "Miau! Insira um level válido!"
+#: launcher.py:183
+msgid "Meowth! Input a valid level!"
 msgstr ""
 
-#: launcher.py:187
-msgid "Miau! Defina suas informações usando */treinador time level*! Esse comando serve para atualizar seu level, quando já definidas as informações de treinador!"
+#: launcher.py:186
+msgid "Meowth! Set up your informations using */trainer team level*! This command is only for updating your level after your trainer's info are all set up!"
 msgstr ""
 
-#: launcher.py:190
-msgid "/missao"
+#: launcher.py:189
+msgid "/quest"
 msgstr ""
 
-#: launcher.py:220 launcher.py:227 launcher.py:245
-msgid "/compartilhar"
+#: launcher.py:219 launcher.py:226 launcher.py:244
+msgid "/share"
 msgstr ""
 
-#: launcher.py:220 launcher.py:227
-msgid "/comentar"
+#: launcher.py:219 launcher.py:226
+msgid "/comment"
 msgstr ""
 
-#: launcher.py:224
-msgid "raid ou missão"
+#: launcher.py:223
+msgid "raid or quest"
 msgstr ""
 
-#: launcher.py:232
-msgid "raid"
-msgstr ""
-
-#: launcher.py:235
-msgid "missão"
-msgstr ""
-
-#: launcher.py:237
-msgid "Miau! Comando inválido!"
-msgstr ""
-
-#: launcher.py:242
-#, python-format
-msgid "Miau! A %s de número *%s* não existe ou já foi finalizada!"
-msgstr ""
-
-#: launcher.py:247 launcher.py:295
+#: launcher.py:229 launcher.py:246 launcher.py:266 launcher.py:294
 msgid "r"
 msgstr ""
 
-#: launcher.py:249
-msgid "m"
+#: launcher.py:231
+msgid "raid"
 msgstr ""
 
-#: launcher.py:254
+#: launcher.py:232 launcher.py:248
+msgid "q"
+msgstr ""
+
+#: launcher.py:234
+msgid "quest"
+msgstr ""
+
+#: launcher.py:236
+msgid "Meowth! Invalid command!"
+msgstr ""
+
+#: launcher.py:241
 #, python-format
-msgid "Miau! A %s de número *%s* já foi postada nesse grupo!"
+msgid "Meowth! The %s of id *%s* does not exist or has already ended!"
 msgstr ""
 
-#: launcher.py:263
+#: launcher.py:253
 #, python-format
-msgid "Miau! A raid de número *%s* já foi finalizada ou cancelada!"
+msgid "Meowth! The %s of id *%s* has already been posted in this group!"
 msgstr ""
 
-#: launcher.py:302
-msgid "/ajuda"
+#: launcher.py:262
+#, python-format
+msgid "Meowth! The raid of id *%s* has already been ended or canceld!"
 msgstr ""
 
-#: launcher.py:363
+#: launcher.py:301
+msgid "/help"
+msgstr ""
+
+#: launcher.py:311
+msgid "/setraids"
+msgstr ""
+
+#: launcher.py:322
+msgid "Meowth! Input the Pokémon numbers!"
+msgstr ""
+
+#: launcher.py:329
+#, python-format
+msgid ""
+"Meowth! Current raids set to:\n"
+"\n"
+"%s"
+msgstr ""
+
+#: launcher.py:333
+msgid "/getraids"
+msgstr ""
+
+#: launcher.py:334
+msgid "Current raids\n"
+msgstr ""
+
+#: launcher.py:341
+msgid "/gettrainers"
+msgstr ""
+
+#: launcher.py:342
+msgid "*Trainers*\n"
+msgstr ""
+
+#: launcher.py:362
 msgid ""
 "\n"
 "\n"
-"_Essa mensagem será deletada automaticamente em 1 minuto._"
+"_This message will be automatically deleted in a minute._"
 msgstr ""
 
-#: launcher.py:366
+#: launcher.py:365
 #, python-format
 msgid ""
-"*Comandos*\n"
-"/treinador - define seu time e level.\n"
-"`/treinador inicial/nome/cor 30`\n"
-"/level - atualiza seu level, mas só funciona se já tiver usado o comando /treinador.\n"
+"*Commands*\n"
+"/trainer - set your team and level.\n"
+"`/trainer initial letter/team name/color 30`\n"
+"/level - update your level but only works after the /trainer command has already been used.\n"
 "`/level 31`\n"
-"/raid - inicia uma nova lista de raid.\n"
-"`/raid pokémon,local,HH:MM`\n"
-"/editar - editar o horário de uma lista de raid em andamento.\n"
-"`/editar ID da raid HH:MM`\n"
-"/cancelar - cancela uma lista de raid em andamento.\n"
-"`/cancelar ID da raid`\n"
-"/finalizar - finaliza uma lista de raid em andamento.\n"
-"`/finalizar ID da raid`\n"
-"/missao - avisa sobre uma missão encontrada.\n"
-"`/missao missão,local,recompensa`\n"
-"/compartilhar - envia uma lista de raid ou aviso de missão para outro grupo, fazendo com que as duas se atualizem automaticamente nos grupos em que foi compartilhada.\n"
-"`/compartilhar m/r ID da raid/missão`\n"
-"/comentar - adiciona uma informação a um aviso de missão ou lista de raid.\n"
-"`/comentar m/r ID da raid comentário`\n"
+"/raid - starts a new raid's list.\n"
+"`/raid pokémon,place,HH:MM`\n"
+"/edit - change the time of a on going raid's list.\n"
+"`/edit raid's ID HH:MM`\n"
+"/cancel - cancel a on going raid's list.\n"
+"`/cancel raid's ID`\n"
+"/end - finish a on going raid's list.\n"
+"`/end raid's ID`\n"
+"/quest - report a found quest.\n"
+"`/quest task,place,reward`\n"
+"/share - send a raid's list or quest's report to another group so that both are automatically updated in the groups it was shared to.\n"
+"`/share q/r raid's/quest's ID`\n"
+"/comment - add informations to a raid's list or quest's report.\n"
+"`/comment q/r raid's/quest's ID comment`\n"
 "\n"
-"*Lista de raid*\n"
-"Para adicionar seu nome a lista, basta tocar no botão _Sim_.\n"
-"Caso vá com mais gente, toque no _+1_ o número de vezes correspondente a quantidade de pessoas que está indo com você. \n"
-"Caso não possa mais ir, toque no botão _Não_ e seu nome será removido automaticamente.\n"
+"*Raid's list*\n"
+"To add yourself to the list, just tap the _Yes_ button.\n"
+"In case there are more people going with you tap the _+1_ for each extra trainer that is going with you.\n"
+"In case you can no longer go tap the _No_ and your name will be automatically removed.\n"
 "\n"
-"*Comentários*\n"
-"Somente conseguirão comentar aqueles que já confirmaram presença na raid.\n"
-"No caso do aviso de missão, qualquer um pode comentar.\n"
+"*Comments*\n"
+"Only those who confirmed that are going to the raid can comment on it.\n"
+"On quest's report, anyone can comment.\n"
 "\n"
-"*Duração dos avisos*\n"
-"Após 1 hora e 45 minutos uma lista de raid é colocada como finalizada (tempo do ovo chocar + duração da raid).\n"
-"A meia-noite de cada dia, os avisos de missão são apagados.\n"
+"*Report's duration*\n"
+"After 1 hour and 45 minutes a raid's list is set to ended (time to egg hatching + raid's duration).\n"
+"At midnight of each day the quests' reports are deleted.\n"
 "\n"
-"Qualquer dúvida, entre em contato comigo!\n"
-"- @OKakarotoSJC%s"
+"Any question, talk to %s %s"
 msgstr ""
 
-#: launcher.py:503
-msgid "Sim"
+#: launcher.py:500
+msgid "Yes"
 msgstr ""
 
-#: launcher.py:504
-msgid "Não"
+#: launcher.py:501
+msgid "No"
 msgstr ""
 
-#: launcher.py:509
+#: launcher.py:506
 #, python-format
 msgid ""
 "#️⃣ ID: *%s*\n"
-"🕵🏽‍♂️ Missão: *%s*\n"
-"%s Local: *%s*\n"
-"%s Recompensa: *%s*"
+"🕵🏽‍♂️ Quest: *%s*\n"
+"%s Place: *%s*\n"
+"%s Reward: *%s*"
 msgstr ""
 
-#: launcher.py:513 launcher.py:548
+#: launcher.py:510 launcher.py:545
 msgid ""
 "\n"
 "\n"
-"*Comentários:*"
+"*Comments:*"
 msgstr ""
 
-#: launcher.py:517
+#: launcher.py:514
 #, python-format
 msgid ""
 "\n"
 "\n"
-"*Avisada por:* %s"
+"*Reported by:* %s"
 msgstr ""
 
-#: launcher.py:524
+#: launcher.py:521
 #, python-format
 msgid ""
 "#️⃣ ID: *%s*\n"
 "%s Pokémon: *%s*\n"
-"%s Local: *%s*\n"
-"%s Horário: *%s*"
+"%s Place: *%s*\n"
+"%s Time: *%s*"
 msgstr ""
 
-#: launcher.py:534
-#, python-brace-format
-msgid ""
-"\n"
-"\n"
-"*Indo:* {total}"
-msgstr ""
-
-#: launcher.py:552
+#: launcher.py:531
 #, python-format
 msgid ""
 "\n"
 "\n"
-"*Criada por:* %s"
+"*Going:* %s"
+msgstr ""
+
+#: launcher.py:549
+#, python-format
+msgid ""
+"\n"
+"\n"
+"*Created by:* %s"
 msgstr ""
 
 #: launcher.py:612
-msgid "Miau! É isso aí!"
+msgid "Meowth! That's right!"
 msgstr ""
