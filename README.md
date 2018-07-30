@@ -8,7 +8,7 @@ A Pokémon GO Telegram bot to manage raids and quests.
 ## Installation
 1. Install Python 3.6+
 2. Install the requirements
-```python -m pip install -r requirements.txt```
+`python -m pip install -r requirements.txt`
 4. Create a Telegram bot using [BotFather](https://telegram.me/botfather) and get its token
 3. Edit the `config.json` by replacing the following:
 
@@ -16,9 +16,9 @@ A Pokémon GO Telegram bot to manage raids and quests.
 - `123456` with your Telegram ID (some commands will only respond to this ID), that can be found by starting a conversation with [this bot](https://telegram.me/getidsbot)
 - `en` with any of the available languages (one of the folder names inside `/locale` directory). If empty or set to an unavailable language it will be set to the main language (English).
 - `YOUR_USERNAME` with your Telegram username
-
-5. Add the bot to a supergroup and give it administrator rights
-6. Enjoy the bot!
+5. Run the bot by using `python launcher.py`
+6. Add the bot to a supergroup and give it administrator rights
+7. Enjoy the bot!
 
 ## Localization
 It's possible to translate the bot to your own language. To do so, follow this steps:
