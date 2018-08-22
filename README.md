@@ -39,20 +39,22 @@ It's possible to translate the bot to your own language. To do so, follow this s
 | /help         | All members   |show a help message|`/help`|
 | /trainer     	| All members 	|set your team and level|`/trainer initial letter/team name/color 30`|
 | /level       	| All members 	|update your level but only works after the /trainer command has already been used|`/level 31`|
-| /raid        	| All members 	|starts a new raid's list|`/raid pokémon,place,HH:MM`|
-| /edit        	| All members 	|change the time of a on going raid's list|`/edit raid's ID HH:MM`|
-| /cancel      	| All members 	|cancel a on going raid's list|`/cancel raid's ID`|
-| /end         	| All members 	|finish a on going raid's list|`/end raid's ID`|
+| /raid        	| All members 	|starts a new raid's list|`/raid level/pokémon (pokédex number or name),place,HH:MM`|
+| /edit        	| All members 	|change the time and the Pokémon of a on going raid's list ** |`/edit raid's ID HH:MM Pokémon name`|
+| /cancel      	| All members 	|cancel a on going raid's list or delete a quest ** |`/cancel r/q raid's/quest's ID`|
+| /end         	| All members 	|finish a on going raid's list ** |`/end raid's ID`|
 | /quest       	| All members 	|report a found quest|`/quest task,place,reward`|
-| /share       	| All members 	|send a raid's list or quest's report to another group so that both are automatically updated in the groups it was shared to|`/share q/r raid's/quest's ID`|
-| /comment     	| All members 	|add informations to a raid's list or quest's report|`/comment q/r raid's/quest's ID comment`|
-| /setraids    	| Master only 	|set the current available raids in the game|`/setraid pkmn_number,pkmn_number`|
+| /share       	| All members 	|send a raid's list or quest's report to another group so that both are automatically updated in the groups it was shared to|`/share r/q raid's/quest's ID`|
+| /comment     	| All members 	|add informations to a raid's list or quest's report|`/comment r/q raid's/quest's ID comment`|
+| /setraids    	| Master only 	|set the current available raids in the game|`/setraids pkmn_number,pkmn_number`|
 | /getraids    	| Master only 	|get the list of current available raids in the game|`/getraids`|
 | /gettrainers 	| Master only 	|get the list of users that have set their trainer's information|`/gettrainers`|
 
+** *you must be the one who created it or the master's bot.*
+
 ## TODO
 - Only create raid's list with time in the future
-- Create raid's list by using the Pokémon Pokédex Number
-- Create raid's list for raids that are yet to hatch
-- Edit raid list's raid boss
-- Cancel quests
+- ~~Create raid's list by using the Pokémon Pokédex Number~~
+- ~~Create raid's list for raids that are yet to hatch~~
+- ~~Edit raid list's raid boss~~
+- ~~Cancel quests~~
