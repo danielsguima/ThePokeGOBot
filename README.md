@@ -49,3 +49,9 @@ It's possible to translate the bot to your own language. To do so, follow this s
 | /setraids    	| Master only 	|set the current available raids in the game|`/setraid pkmn_number,pkmn_number`|
 | /getraids    	| Master only 	|get the list of current available raids in the game|`/getraids`|
 | /gettrainers 	| Master only 	|get the list of users that have set their trainer's information|`/gettrainers`|
+
+## TODO
+- Create raid's list for raids that are yet to hatch
+- Edit raid list's raid boss
+- Edit quests
+- Cancel quests
