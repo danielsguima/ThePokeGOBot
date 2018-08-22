@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-08-22 16:34-0300\n"
+"POT-Creation-Date: 2018-08-22 17:22-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,8 +27,8 @@ msgstr ""
 msgid "Meowth! *%s* is not a valid Pokémon!"
 msgstr ""
 
-#: launcher.py:78 launcher.py:258 launcher.py:309 launcher.py:589
-#: launcher.py:606
+#: launcher.py:78 launcher.py:258 launcher.py:309 launcher.py:583
+#: launcher.py:600
 msgid "active"
 msgstr ""
 
@@ -75,7 +75,7 @@ msgstr ""
 msgid "canceled"
 msgstr ""
 
-#: launcher.py:162 launcher.py:488
+#: launcher.py:162 launcher.py:482
 msgid "ended"
 msgstr ""
 
@@ -181,11 +181,11 @@ msgstr ""
 msgid "/setraids"
 msgstr ""
 
-#: launcher.py:390
+#: launcher.py:387
 msgid "Meowth! Input the Pokémon numbers!"
 msgstr ""
 
-#: launcher.py:397
+#: launcher.py:394
 #, python-format
 msgid ""
 "Meowth! Current raids set to:\n"
@@ -193,30 +193,30 @@ msgid ""
 "%s"
 msgstr ""
 
-#: launcher.py:401
+#: launcher.py:398
 msgid "/getraids"
 msgstr ""
 
-#: launcher.py:402
+#: launcher.py:399
 msgid "Current raids\n"
 msgstr ""
 
-#: launcher.py:412
+#: launcher.py:406
 msgid "/gettrainers"
 msgstr ""
 
-#: launcher.py:413
+#: launcher.py:407
 msgid "*Trainers*\n"
 msgstr ""
 
-#: launcher.py:434
+#: launcher.py:428
 msgid ""
 "\n"
 "\n"
 "_This message will be automatically deleted in a minute._"
 msgstr ""
 
-#: launcher.py:437
+#: launcher.py:431
 #, python-format
 msgid ""
 "*Commands*\n"
@@ -225,7 +225,7 @@ msgid ""
 "/level - update your level but only works after the /trainer command has already been used.\n"
 "`/level 31`\n"
 "/raid - starts a new raid's list.\n"
-"`/raid pokémon,place,HH:MM`\n"
+"`/raid level/pokémon (pokédex number or name),place,HH:MM`\n"
 "/edit - change the time and the Pokémon of a on going raid's list.\n"
 "`/edit raid's ID HH:MM Pokémon name`\n"
 "/cancel - cancel a on going raid's list or delete a quest.\n"
@@ -255,15 +255,15 @@ msgid ""
 "Any question, talk to %s %s"
 msgstr ""
 
-#: launcher.py:579
+#: launcher.py:573
 msgid "Yes"
 msgstr ""
 
-#: launcher.py:581
+#: launcher.py:575
 msgid "No"
 msgstr ""
 
-#: launcher.py:586
+#: launcher.py:580
 #, python-format
 msgid ""
 "#️⃣ ID: *%s*\n"
@@ -272,14 +272,14 @@ msgid ""
 "%s Reward: *%s*"
 msgstr ""
 
-#: launcher.py:591 launcher.py:628
+#: launcher.py:585 launcher.py:622
 msgid ""
 "\n"
 "\n"
 "*Comments:*"
 msgstr ""
 
-#: launcher.py:595
+#: launcher.py:589
 #, python-format
 msgid ""
 "\n"
@@ -287,7 +287,7 @@ msgid ""
 "*Reported by:* %s"
 msgstr ""
 
-#: launcher.py:603
+#: launcher.py:597
 #, python-format
 msgid ""
 "#️⃣ ID: *%s*\n"
@@ -296,7 +296,7 @@ msgid ""
 "%s Time: *%s*"
 msgstr ""
 
-#: launcher.py:614
+#: launcher.py:608
 #, python-format
 msgid ""
 "\n"
@@ -304,7 +304,7 @@ msgid ""
 "*Going:* %s"
 msgstr ""
 
-#: launcher.py:632
+#: launcher.py:626
 #, python-format
 msgid ""
 "\n"
@@ -312,6 +312,6 @@ msgid ""
 "*Created by:* %s"
 msgstr ""
 
-#: launcher.py:699
+#: launcher.py:693
 msgid "Meowth! That's right!"
 msgstr ""
