@@ -52,8 +52,7 @@ It's possible to translate the bot to your own language. To do so, follow this s
 
 ## TODO
 - Only create raid's list with time in the future
-- Create raid's list by using the Pokémon Pokédex Number
-- Create raid's list for raids that are yet to hatch
-- Edit raid list's raid boss
-- Edit quests
-- Cancel quests
+- ~~Create raid's list by using the Pokémon Pokédex Number~~
+- ~~Create raid's list for raids that are yet to hatch~~
+- ~~Edit raid list's raid boss~~
+~~- Cancel quests~~
