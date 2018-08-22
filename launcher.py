@@ -374,9 +374,12 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
         if user['id'] == self.master:
             # Set available raids
             if cmd == _('/setraids'):
-                self.curr_raids = []
+                self.curr_raids = self.levels
                 error = False
                 pkmn_names = []
+
+                for level in self.levels:
+                    pkmn_names.append(f"*{level}*")
 
                 for pkmn in params[0].split(','):
                     try:
@@ -398,7 +401,10 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
             elif cmd == _('/getraids'):
                 message = _("Current raids\n")
                 for pkmn in self.curr_raids:
-                    message += f"\n*{self.pokemon[pkmn]}*"
+                    try:
+                        message += f"\n*{self.pokemon[pkmn]}*"
+                    except Exception:
+                        message += f"\n*{pkmn}*"
 
                 msg = await self.sender.sendMessage(message, parse_mode="markdown")
                 self.delete_messages(msg)
@@ -435,10 +441,10 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
               "\n`/level 31`"
               "\n/raid - starts a new raid's list."
               "\n`/raid pokémon,place,HH:MM`"
-              "\n/edit - change the time of a on going raid's list."
-              "\n`/edit raid's ID HH:MM`"
-              "\n/cancel - cancel a on going raid's list."
-              "\n`/cancel raid's ID`"
+              "\n/edit - change the time and the Pokémon of a on going raid's list."
+              "\n`/edit raid's ID HH:MM Pokémon name`"
+              "\n/cancel - cancel a on going raid's list or delete a quest."
+              "\n`/cancel r/q raid's/quest's ID`"
               "\n/end - finish a on going raid's list."
               "\n`/end raid's ID`"
               "\n/quest - report a found quest."
