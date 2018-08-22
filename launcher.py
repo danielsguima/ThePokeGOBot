@@ -114,23 +114,23 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
 
                 try:
                     self.pokemon.index(new_poke) + 1
-                    can_edit = True
+                    can_be_edit = True
                 except Exception:
                     try:
                         if int(new_poke) in self.curr_raids:
-                            can_edit = True
+                            can_be_edit = True
                             new_poke = self.pokemon[int(new_poke) - 1]
                         else:
                             msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid Pokémon!") % (new_poke), parse_mode="markdown")
                             self.delete_messages(msg)
                     except TypeError:
                         if new_poke in self.curr_raids:
-                            can_edit = True
+                            can_be_edit = True
                         else:
                             msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid Pokémon!") % (new_poke), parse_mode="markdown")
                             self.delete_messages(msg)
 
-                if can_edit == True:
+                if can_be_edit == True:
                     raid = next(
                         (x for x in self.raids['raids'] if int(x['id']) == raid_id), None)
                     if raid == None:
