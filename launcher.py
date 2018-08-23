@@ -1,7 +1,6 @@
 import gettext
 import sys
 import asyncio
-import pytz
 from datetime import date, datetime, timezone, timedelta
 import time
 import json
