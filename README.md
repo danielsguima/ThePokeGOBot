@@ -1,5 +1,6 @@
 # ThePokeGOBot
 A Pokémon GO Telegram bot to manage raids and quests.
+
 ## Requirements
 - [Python 3.6+](https://www.python.org/downloads/)
 - [Telepot](https://github.com/nickoala/telepot)
@@ -10,12 +11,14 @@ A Pokémon GO Telegram bot to manage raids and quests.
 2. Install the requirements
 `python -m pip install -r requirements.txt`
 4. Create a Telegram bot using [BotFather](https://telegram.me/botfather) and get its token
-3. Edit the `config.json` by replacing the following:
+3. Rename the `config_blank.json` to `config.json` and edit it by replacing the following:
 
 - `BOT_TOKEN` with your Telegram Bot Token
 - `123456` with your Telegram ID (some commands will only respond to this ID), that can be found by starting a conversation with [this bot](https://telegram.me/getidsbot)
 - `en` with any of the available languages (one of the folder names inside `/locale` directory). If empty or set to an unavailable language it will be set to the main language (English).
 - `YOUR_USERNAME` with your Telegram username
+- `0` with your timezone (by default it's using GMT +0)
+
 5. Run the bot by using `python launcher.py`
 6. Add the bot to a supergroup and give it administrator rights
 7. Enjoy the bot!
@@ -53,7 +56,7 @@ It's possible to translate the bot to your own language. To do so, follow this s
 ** *you must be the one who created it or the master's bot.*
 
 ## TODO
-- Only create raid's list with time in the future
+- ~~Only create raid's list with time in the future~~
 - ~~Create raid's list by using the Pokémon Pokédex Number~~
 - ~~Create raid's list for raids that are yet to hatch~~
 - ~~Edit raid list's raid boss~~

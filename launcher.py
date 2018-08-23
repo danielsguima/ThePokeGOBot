@@ -2,8 +2,9 @@ import gettext
 import sys
 import asyncio
 import pytz
-import datetime
+from datetime import date, datetime, timezone, timedelta
 import time
+from time import mktime
 import json
 import emoji
 import telepot
@@ -67,33 +68,42 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
 
                     if pkmn_num in self.curr_raids:
                         try:
-                            time.strptime(parts[2].strip(), '%H:%M')
+                            now = datetime.now()
 
-                            raid = {
-                                'id': int(self.raids['index']) + 1,
-                                'pokemon': pkmn_name.title(),
-                                'place': parts[1].strip().title(),
-                                'start_time': parts[2].strip(),
-                                'created_by': user,
-                                'status': _('active'),
-                                'going': [],
-                                'messages': [],
-                                'comments': []
-                            }
+                            raid_time = time.strptime(
+                                parts[2].strip(), '%H:%M')
+                            raid_time = datetime(
+                                now.year, now.month, now.day, raid_time.tm_hour, raid_time.tm_min).time()
 
-                            raid_keyboard = self.create_keyboard(raid)
+                            if raid_time >= datetime.now().time():
+                                raid = {
+                                    'id': int(self.raids['index']) + 1,
+                                    'pokemon': pkmn_name.title(),
+                                    'place': parts[1].strip().title(),
+                                    'start_time': parts[2].strip(),
+                                    'created_by': user,
+                                    'status': _('active'),
+                                    'going': [],
+                                    'messages': [],
+                                    'comments': []
+                                }
 
-                            msg = await self.sender.sendMessage(self.create_list(raid), reply_markup=raid_keyboard, parse_mode="markdown")
+                                raid_keyboard = self.create_keyboard(raid)
 
-                            self.scheduler.event_later(self.convert_to_seconds(
-                                1, 45), ('_delete_raid', {'raid_id': raid['id']}))
+                                msg = await self.sender.sendMessage(self.create_list(raid), reply_markup=raid_keyboard, parse_mode="markdown")
 
-                            if next((x for x in raid['messages'] if int(x['message_id']) == int(msg['message_id'])), None) == None:
-                                raid['messages'].append(msg)
+                                self.scheduler.event_later(self.convert_to_seconds(
+                                    1, 45), ('_delete_raid', {'raid_id': raid['id']}))
 
-                            self.raids["index"] = int(raid['id'])
-                            self.raids["raids"].append(raid)
-                            self.persist_data()
+                                if next((x for x in raid['messages'] if int(x['message_id']) == int(msg['message_id'])), None) == None:
+                                    raid['messages'].append(msg)
+
+                                self.raids["index"] = int(raid['id'])
+                                self.raids["raids"].append(raid)
+                                self.persist_data()
+                            else:
+                                msg = await self.sender.sendMessage(_("Meowth! The time must be in the future!"), parse_mode="markdown")
+                                self.delete_messages(msg)
                         except Exception:
                             msg = await self.sender.sendMessage(_("Meowth! The time must be in the format of *HH:MM*!"), parse_mode="markdown")
                             self.delete_messages(msg)
@@ -262,11 +272,10 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
 
                 msg = await self.sender.sendMessage(self.create_quest(quest), parse_mode="markdown")
 
-                tomorrow = datetime.datetime.now(pytz.utc).day + 1
-                midnight = datetime.datetime.now(pytz.utc).replace(
-                    day=tomorrow, hour=0, minute=0, second=0, microsecond=0)
-                diff = (midnight - (datetime.datetime.now(pytz.utc) -
-                                    datetime.timedelta(hours=3))).seconds
+                now = datetime.now().astimezone(self.timezone)
+                tomorrow = datetime(now.year, now.month,
+                                    now.day + 1, tzinfo=self.timezone)
+                diff = (tomorrow - now).seconds
 
                 self.scheduler.event_later(
                     diff, ('_delete_quest', {'quest_id': quest['id']}))
@@ -644,6 +653,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
     def load_data(self):
         config = json.loads(open('config.json').read())
 
+        self.timezone = timezone(timedelta(hours=config['timezone']))
         self.master = config['master_id']
         self.master_username = config['master_username']
 
