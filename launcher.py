@@ -4,7 +4,6 @@ import asyncio
 import pytz
 from datetime import date, datetime, timezone, timedelta
 import time
-from time import mktime
 import json
 import emoji
 import telepot
