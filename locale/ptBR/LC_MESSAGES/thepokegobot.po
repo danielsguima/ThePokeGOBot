@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-08-24 09:24-0300\n"
-"PO-Revision-Date: 2018-08-24 09:24-0300\n"
+"POT-Creation-Date: 2018-08-24 11:09-0300\n"
+"PO-Revision-Date: 2018-08-24 11:10-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -19,17 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SearchPath-0: launcher.py\n"
 
-#: launcher.py:47
-msgid "/raid"
-msgstr "/raid"
+#: launcher.py:47 launcher.py:308 launcher.py:697
+msgid "raid"
+msgstr "raid"
 
 #: launcher.py:64 launcher.py:105 launcher.py:132 launcher.py:139
 #, python-format
 msgid "Meowth! *%s* is not a valid Pokémon!"
 msgstr "Miau! *%s* não é um Pokémon válido!"
 
-#: launcher.py:76 launcher.py:273 launcher.py:323 launcher.py:601
-#: launcher.py:618
+#: launcher.py:76 launcher.py:273 launcher.py:323 launcher.py:610
+#: launcher.py:627
 msgid "active"
 msgstr "ativa"
 
@@ -46,41 +46,37 @@ msgstr "Miau! O horário deve estar no formato *HH:MM*!"
 msgid "Meowth! The Pokémon *%s* is not currently in the raids!"
 msgstr "Miau! O Pokémon *%s* não aparece em raids atualmente!"
 
-#: launcher.py:108
-msgid "/edit"
-msgstr "/editar"
+#: launcher.py:108 launcher.py:702
+msgid "edit"
+msgstr "editar"
 
 #: launcher.py:119 launcher.py:172
 #, python-format
 msgid "Meowth! The raid of id *%s* does not exist or has already ended!"
 msgstr "Miau! A raid de número *%s* não existe ou já foi finalizada!"
 
-#: launcher.py:162 launcher.py:165 launcher.py:181
-msgid "/cancel"
-msgstr "/cancelar"
+#: launcher.py:162 launcher.py:165 launcher.py:177 launcher.py:707
+msgid "cancel"
+msgstr "cancelar"
 
-#: launcher.py:162
-msgid "/end"
-msgstr "/finalizar"
+#: launcher.py:162 launcher.py:165 launcher.py:712
+msgid "end"
+msgstr "finalizar"
 
 #: launcher.py:164 launcher.py:306 launcher.py:324 launcher.py:344
 #: launcher.py:373
 msgid "r"
 msgstr "r"
 
-#: launcher.py:165 launcher.py:177
-msgid "cancel"
-msgstr "cancelar"
-
-#: launcher.py:165
-msgid "end"
-msgstr "finalizar"
+#: launcher.py:165 launcher.py:181
+msgid "/cancel"
+msgstr "/cancelar"
 
 #: launcher.py:176 launcher.py:193
 msgid "canceled"
 msgstr "cancelada"
 
-#: launcher.py:177 launcher.py:500
+#: launcher.py:177 launcher.py:509
 msgid "ended"
 msgstr "finalizada"
 
@@ -93,9 +89,9 @@ msgstr "m"
 msgid "Meowth! The quest of id *%s* does not exist!"
 msgstr "Miau! A missão de número *%s* não existe!"
 
-#: launcher.py:198
-msgid "/trainer"
-msgstr "/treinador"
+#: launcher.py:198 launcher.py:687
+msgid "trainer"
+msgstr "treinador"
 
 #: launcher.py:199
 msgid "red"
@@ -118,9 +114,9 @@ msgstr "Miau! Time *%s* e level *%s* definidos!"
 msgid "Meowth! Input a valid team and level!"
 msgstr "Miau! Informe um time e level válidos!"
 
-#: launcher.py:243
-msgid "/level"
-msgstr "/level"
+#: launcher.py:243 launcher.py:692
+msgid "level"
+msgstr "level"
 
 #: launcher.py:254
 #, python-format
@@ -140,28 +136,32 @@ msgstr ""
 "serve para atualizar seu level, quando já definidas as informações de "
 "treinador!"
 
-#: launcher.py:263
-msgid "/quest"
-msgstr "/missao"
+#: launcher.py:263 launcher.py:717
+msgid "quest"
+msgstr "missao"
 
-#: launcher.py:295 launcher.py:303 launcher.py:322
-msgid "/share"
-msgstr "/compartilhar"
+#: launcher.py:295 launcher.py:722
+msgid "share"
+msgstr "compartilhar"
 
-#: launcher.py:295 launcher.py:303
-msgid "/comment"
-msgstr "/comentar"
+#: launcher.py:295 launcher.py:727
+msgid "comment"
+msgstr "comentar"
 
 #: launcher.py:299
 msgid "raid or quest"
 msgstr "raid ou missão"
 
-#: launcher.py:308
-msgid "raid"
-msgstr "raid"
+#: launcher.py:303 launcher.py:322
+msgid "/share"
+msgstr "/compartilhar"
+
+#: launcher.py:303
+msgid "/comment"
+msgstr "/comentar"
 
 #: launcher.py:311
-msgid "quest"
+msgid "research"
 msgstr "missão"
 
 #: launcher.py:313
@@ -184,18 +184,45 @@ msgid "Meowth! The raid of id *%s* has already been ended or canceld!"
 msgstr "Miau! A raid de número *%s* já foi finalizada ou cancelada!"
 
 #: launcher.py:380
-msgid "/help"
-msgstr "/ajuda"
+msgid "help"
+msgstr "ajuda"
 
-#: launcher.py:390
+#: launcher.py:385 launcher.py:732
+msgid "about"
+msgstr "sobre"
+
+#: launcher.py:386
+msgid ""
+"Meowth! That's right!\n"
+"\n"
+"I'm a bot that will help you managing your Pokémon GO group! I can report "
+"the quests you found, create raid's list for you and some other things.\n"
+"\n"
+"You can find my source code at https://github.com/danielsguima/"
+"ThePokeGOBot.\n"
+"\n"
+"*Created by:* @OKakarotoSJC"
+msgstr ""
+"Miau! É isso aí!\n"
+"\n"
+"Eu sou um bot que vai te ajudar a gerenciar o seu grupo de Pokémon GO! Eu "
+"posso avisar sobre missões que você encontrou, criar listas de raid para "
+"você e algumas outras coisas.\n"
+"\n"
+"Você pode encontrar meu código fonte em https://github.com/danielsguima/"
+"ThePokeGOBot.\n"
+"\n"
+"*Criado por:* @OKakarotoSJC"
+
+#: launcher.py:398
 msgid "/setraids"
 msgstr "/setraids"
 
-#: launcher.py:401
+#: launcher.py:409
 msgid "Meowth! Input the Pokémon numbers!"
 msgstr "Miau! Insira os números dos Pokémon!"
 
-#: launcher.py:408
+#: launcher.py:416
 #, python-format
 msgid ""
 "Meowth! Current raids set to:\n"
@@ -206,23 +233,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: launcher.py:412
+#: launcher.py:420
 msgid "/getraids"
 msgstr "/getraids"
 
-#: launcher.py:413
+#: launcher.py:421
 msgid "Current raids\n"
 msgstr "Raids atuais\n"
 
-#: launcher.py:424
+#: launcher.py:432
 msgid "/gettrainers"
 msgstr "/gettrainers"
 
-#: launcher.py:425
+#: launcher.py:433
 msgid "*Trainers*\n"
 msgstr "*Treinadores*\n"
 
-#: launcher.py:446
+#: launcher.py:456
 msgid ""
 "\n"
 "\n"
@@ -232,30 +259,14 @@ msgstr ""
 "\n"
 "_Essa mensagem será deletada automaticamente em 1 minuto._"
 
-#: launcher.py:449
+#: launcher.py:459
+msgid "*Commands*"
+msgstr "*Comandos:*"
+
+#: launcher.py:464
 #, python-format
 msgid ""
-"*Commands*\n"
-"/trainer - set your team and level.\n"
-"`/trainer initial letter/team name/color 30`\n"
-"/level - update your level but only works after the /trainer command has "
-"already been used.\n"
-"`/level 31`\n"
-"/raid - starts a new raid's list.\n"
-"`/raid level/pokémon (pokédex number or name),place,HH:MM`\n"
-"/edit - change the time and the Pokémon of a on going raid's list.\n"
-"`/edit raid's ID HH:MM Pokémon name`\n"
-"/cancel - cancel a on going raid's list or delete a quest.\n"
-"`/cancel r/q raid's/quest's ID`\n"
-"/end - finish a on going raid's list.\n"
-"`/end raid's ID`\n"
-"/quest - report a found quest.\n"
-"`/quest task,place,reward`\n"
-"/share - send a raid's list or quest's report to another group so that both "
-"are automatically updated in the groups it was shared to.\n"
-"`/share q/r raid's/quest's ID`\n"
-"/comment - add informations to a raid's list or quest's report.\n"
-"`/comment q/r raid's/quest's ID comment`\n"
+"\n"
 "\n"
 "*Raid's list*\n"
 "To add yourself to the list, just tap the _Yes_ button.\n"
@@ -275,29 +286,7 @@ msgid ""
 "\n"
 "Any question, talk to %s %s"
 msgstr ""
-"*Comandos*\n"
-"/treinador - define seu time e level.\n"
-"`/treinador inicial/nome/cor 30`\n"
-"/level - atualiza seu level, mas só funciona se já tiver usado o comando /"
-"treinador.\n"
-"`/level 31`\n"
-"/raid - inicia uma nova lista de raid.\n"
-"`/raid level/pokémon (número da pokédex ou nome),local,HH:MM`\n"
-"/editar - edita o horário e o Pokémon de uma lista de raid em andamento.\n"
-"`/editar ID da raid HH:MM Pokémon`\n"
-"/cancelar - cancela uma lista de raid em andamento ou remove uma missão "
-"reportada.\n"
-"`/cancelar r/m ID da raid/missão`\n"
-"/finalizar - finaliza uma lista de raid em andamento.\n"
-"`/finalizar ID da raid`\n"
-"/missao - avisa sobre uma missão encontrada.\n"
-"`/missao missão,local,recompensa`\n"
-"/compartilhar - envia uma lista de raid ou aviso de missão para outro grupo, "
-"fazendo com que as duas se atualizem automaticamente nos grupos em que foi "
-"compartilhada.\n"
-"`/compartilhar m/r ID da raid/missão`\n"
-"/comentar - adiciona uma informação a um aviso de missão ou lista de raid.\n"
-"`/comentar m/r ID da raid comentário`\n"
+"\n"
 "\n"
 "*Lista de raid*\n"
 "Para adicionar seu nome a lista, basta tocar no botão _Sim_.\n"
@@ -317,15 +306,33 @@ msgstr ""
 "\n"
 "Qualquer dúvida, fale com %s %s"
 
-#: launcher.py:591
+#: launcher.py:480
+#, python-format
+msgid ""
+"Meowth! That's how you use the *%s* command!\n"
+"\n"
+" %s\n"
+"%s"
+msgstr ""
+"Miau! É assim que se usa o comando *%s*!\n"
+"\n"
+"%s\n"
+"%s"
+
+#: launcher.py:483
+#, python-format
+msgid "Meowth! *%s* is not a valid command!"
+msgstr "Miau! *%s* não é um comando válido!"
+
+#: launcher.py:600
 msgid "Yes"
 msgstr "Sim"
 
-#: launcher.py:593
+#: launcher.py:602
 msgid "No"
 msgstr "Não"
 
-#: launcher.py:598
+#: launcher.py:607
 #, python-format
 msgid ""
 "#️⃣ ID: *%s*\n"
@@ -338,7 +345,7 @@ msgstr ""
 "%s Local: *%s*\n"
 "%s Recompensa: *%s*"
 
-#: launcher.py:603 launcher.py:640
+#: launcher.py:612 launcher.py:649
 msgid ""
 "\n"
 "\n"
@@ -348,7 +355,7 @@ msgstr ""
 "\n"
 "*Comentários:*"
 
-#: launcher.py:607
+#: launcher.py:616
 #, python-format
 msgid ""
 "\n"
@@ -359,7 +366,7 @@ msgstr ""
 "\n"
 "*Avisada por:* %s"
 
-#: launcher.py:615
+#: launcher.py:624
 #, python-format
 msgid ""
 "#️⃣ ID: *%s*\n"
@@ -372,7 +379,7 @@ msgstr ""
 "%s Local: *%s*\n"
 "%s Horário: *%s*"
 
-#: launcher.py:626
+#: launcher.py:635
 #, python-format
 msgid ""
 "\n"
@@ -383,7 +390,7 @@ msgstr ""
 "\n"
 "*Indo:* %s"
 
-#: launcher.py:644
+#: launcher.py:653
 #, python-format
 msgid ""
 "\n"
@@ -394,6 +401,193 @@ msgstr ""
 "\n"
 "*Criada por:* %s"
 
-#: launcher.py:722
+#: launcher.py:688
+msgid "/trainer - set your team and level."
+msgstr "/treinador - define seu time e level."
+
+#: launcher.py:689
+msgid "`/trainer initial letter/team name/color 30`"
+msgstr "`/treinador inicial/nome/cor 30`"
+
+#: launcher.py:693
+msgid ""
+"/level - update your level but only works after the /trainer command has "
+"already been used."
+msgstr ""
+"/level - atualiza seu level, mas só funciona se já tiver usado o comando /"
+"treinador."
+
+#: launcher.py:694
+msgid "`/level 31`"
+msgstr "`/level 31`"
+
+#: launcher.py:698
+msgid "/raid - starts a new raid's list."
+msgstr "/raid - inicia uma nova lista de raid."
+
+#: launcher.py:699
+msgid "`/raid level/pokémon (pokédex number or name),place,HH:MM`"
+msgstr "`/raid level/pokémon (número da pokédex ou nome),local,HH:MM`"
+
+#: launcher.py:703
+msgid "/edit - change the time and the Pokémon of a on going raid's list."
+msgstr ""
+"/editar - edita o horário e o Pokémon de uma lista de raid em andamento."
+
+#: launcher.py:704
+msgid "`/edit raid's ID HH:MM Pokémon name`"
+msgstr "`/editar ID da raid HH:MM Pokémon`"
+
+#: launcher.py:708
+msgid "/cancel - cancel a on going raid's list or delete a quest."
+msgstr ""
+"/cancelar - cancela uma lista de raid em andamento ou remove uma missão "
+"reportada."
+
+#: launcher.py:709
+msgid "`/cancel r/q raid's/quest's ID`"
+msgstr "`/cancelar r/m ID da raid/missão`"
+
+#: launcher.py:713
+msgid "/end - finish a on going raid's list."
+msgstr "/finalizar - finaliza uma lista de raid em andamento."
+
+#: launcher.py:714
+msgid "`/end raid's ID`"
+msgstr "`/finalizar ID da raid`"
+
+#: launcher.py:718
+msgid "/quest - report a found quest."
+msgstr "/missao - avisa sobre uma missão encontrada."
+
+#: launcher.py:719
+msgid "`/quest task,place,reward`"
+msgstr "`/missao missão,local,recompensa`"
+
+#: launcher.py:723
+msgid ""
+"/share - send a raid's list or quest's report to another group so that both "
+"are automatically updated in the groups it was shared to."
+msgstr ""
+"/compartilhar - envia uma lista de raid ou aviso de missão para outro grupo, "
+"fazendo com que as duas se atualizem automaticamente nos grupos em que foi "
+"compartilhada."
+
+#: launcher.py:724
+msgid "`/share q/r raid's/quest's ID`"
+msgstr "`/compartilhar m/r ID da raid/missão`"
+
+#: launcher.py:728
+msgid "/comment - add informations to a raid's list or quest's report."
+msgstr ""
+"/comentar - adiciona uma informação a um aviso de missão ou lista de raid."
+
+#: launcher.py:729
+msgid "`/comment q/r raid's/quest's ID comment`"
+msgstr "`/comentar m/r ID da raid comentário`"
+
+#: launcher.py:733
+msgid "/about - show informations about the bot"
+msgstr "/sobre - mostra informações sobre o bot"
+
+#: launcher.py:734
+msgid "`/about`"
+msgstr "`/sobre`"
+
+#: launcher.py:784
 msgid "Meowth! That's right!"
 msgstr "Miau! É isso aí!"
+
+#~ msgid "/raid"
+#~ msgstr "/raid"
+
+#~ msgid "/end"
+#~ msgstr "/finalizar"
+
+#~ msgid "/quest"
+#~ msgstr "/missao"
+
+#~ msgid ""
+#~ "*Commands*\n"
+#~ "/trainer - set your team and level.\n"
+#~ "`/trainer initial letter/team name/color 30`\n"
+#~ "/level - update your level but only works after the /trainer command has "
+#~ "already been used.\n"
+#~ "`/level 31`\n"
+#~ "/raid - starts a new raid's list.\n"
+#~ "`/raid level/pokémon (pokédex number or name),place,HH:MM`\n"
+#~ "/edit - change the time and the Pokémon of a on going raid's list.\n"
+#~ "`/edit raid's ID HH:MM Pokémon name`\n"
+#~ "/cancel - cancel a on going raid's list or delete a quest.\n"
+#~ "`/cancel r/q raid's/quest's ID`\n"
+#~ "/end - finish a on going raid's list.\n"
+#~ "`/end raid's ID`\n"
+#~ "/quest - report a found quest.\n"
+#~ "`/quest task,place,reward`\n"
+#~ "/share - send a raid's list or quest's report to another group so that "
+#~ "both are automatically updated in the groups it was shared to.\n"
+#~ "`/share q/r raid's/quest's ID`\n"
+#~ "/comment - add informations to a raid's list or quest's report.\n"
+#~ "`/comment q/r raid's/quest's ID comment`\n"
+#~ "\n"
+#~ "*Raid's list*\n"
+#~ "To add yourself to the list, just tap the _Yes_ button.\n"
+#~ "In case there are more people going with you tap the _+1_ for each extra "
+#~ "trainer that is going with you.\n"
+#~ "In case you can no longer go tap the _No_ and your name will be "
+#~ "automatically removed.\n"
+#~ "\n"
+#~ "*Comments*\n"
+#~ "Only those who confirmed that are going to the raid can comment on it.\n"
+#~ "On quest's report, anyone can comment.\n"
+#~ "\n"
+#~ "*Report's duration*\n"
+#~ "After 1 hour and 45 minutes a raid's list is set to ended (time to egg "
+#~ "hatching + raid's duration).\n"
+#~ "At midnight of each day the quests' reports are deleted.\n"
+#~ "\n"
+#~ "Any question, talk to %s %s"
+#~ msgstr ""
+#~ "*Comandos*\n"
+#~ "/treinador - define seu time e level.\n"
+#~ "`/treinador inicial/nome/cor 30`\n"
+#~ "/level - atualiza seu level, mas só funciona se já tiver usado o comando /"
+#~ "treinador.\n"
+#~ "`/level 31`\n"
+#~ "/raid - inicia uma nova lista de raid.\n"
+#~ "`/raid level/pokémon (número da pokédex ou nome),local,HH:MM`\n"
+#~ "/editar - edita o horário e o Pokémon de uma lista de raid em andamento.\n"
+#~ "`/editar ID da raid HH:MM Pokémon`\n"
+#~ "/cancelar - cancela uma lista de raid em andamento ou remove uma missão "
+#~ "reportada.\n"
+#~ "`/cancelar r/m ID da raid/missão`\n"
+#~ "/finalizar - finaliza uma lista de raid em andamento.\n"
+#~ "`/finalizar ID da raid`\n"
+#~ "/missao - avisa sobre uma missão encontrada.\n"
+#~ "`/missao missão,local,recompensa`\n"
+#~ "/compartilhar - envia uma lista de raid ou aviso de missão para outro "
+#~ "grupo, fazendo com que as duas se atualizem automaticamente nos grupos em "
+#~ "que foi compartilhada.\n"
+#~ "`/compartilhar m/r ID da raid/missão`\n"
+#~ "/comentar - adiciona uma informação a um aviso de missão ou lista de "
+#~ "raid.\n"
+#~ "`/comentar m/r ID da raid comentário`\n"
+#~ "\n"
+#~ "*Lista de raid*\n"
+#~ "Para adicionar seu nome a lista, basta tocar no botão _Sim_.\n"
+#~ "Caso vá com mais gente, toque no _+1_ o número de vezes correspondente a "
+#~ "quantidade de pessoas que está indo com você. \n"
+#~ "Caso não possa mais ir, toque no botão _Não_ e seu nome será removido "
+#~ "automaticamente.\n"
+#~ "\n"
+#~ "*Comentários*\n"
+#~ "Somente conseguirão comentar aqueles que já confirmaram presença na "
+#~ "raid.\n"
+#~ "No caso do aviso de missão, qualquer um pode comentar.\n"
+#~ "\n"
+#~ "*Duração dos avisos*\n"
+#~ "Após 1 hora e 45 minutos uma lista de raid é colocada como finalizada "
+#~ "(tempo do ovo chocar + duração da raid).\n"
+#~ "A meia-noite de cada dia, os avisos de missão são apagados.\n"
+#~ "\n"
+#~ "Qualquer dúvida, fale com %s %s"

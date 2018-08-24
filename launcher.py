@@ -44,7 +44,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
         self.load_data()
 
         # Start a raid
-        if cmd == _('/raid'):
+        if cmd == '/' + _('raid'):
             parts = " ".join(params).split(',')
 
             if len(parts) == 3:
@@ -105,7 +105,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                     msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid Pokémon!") % (parts[0].strip().title()), parse_mode="markdown")
                     self.delete_messages(msg)
         # Edit the start time of the raid
-        elif cmd == _('/edit'):
+        elif cmd == '/' + _('edit'):
             if len(params) == 3:
                 can_edit = False
 
@@ -139,7 +139,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                                     msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid Pokémon!") % (new_poke), parse_mode="markdown")
                                     self.delete_messages(msg)
                                     can_edit = False
-                        
+
                         try:
                             if self.is_time_in_future(new_time):
                                 can_edit = True
@@ -159,7 +159,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                             for msg in raid['messages']:
                                 await self.bot.editMessageText(telepot.message_identifier(msg), self.create_list(raid), reply_markup=self.create_keyboard(raid), parse_mode="markdown")
         # Cancel/finish active raid
-        elif cmd == _('/cancel') or cmd == _('/end'):
+        elif cmd == '/' + _('cancel') or cmd == '/' + _('end'):
             if len(params) == 2:
                 if params[0] == _('r'):
                     command = _('cancel') if cmd == _('/cancel') else _('end')
@@ -195,7 +195,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                                 for msg in quest['messages']:
                                     self.delete_messages(msg, 0)
         # Set trainer informations
-        elif cmd == _('/trainer'):
+        elif cmd == '/' + _('trainer'):
             teams = [['valor', _('red'), 'v', ':fire:'], [
                 'mystic', _('blue'), 'm', ':snowflake:'], ['instinct', _('yellow'), 'i', '⚡']]
 
@@ -240,7 +240,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                 msg = await self.sender.sendMessage(_("Meowth! Input a valid team and level!"))
                 self.delete_messages(msg)
         # Update trainer's level
-        elif cmd == _('/level'):
+        elif cmd == '/' + _('level'):
             if len(params) == 1:
                 level = int(params[0].strip())
 
@@ -260,7 +260,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                         msg = await self.sender.sendMessage(_("Meowth! Set up your informations using */trainer team level*! This command is only for updating your level after your trainer's info are all set up!"), parse_mode="markdown")
                         self.delete_messages(msg)
         # Post a quest report
-        elif cmd == _('/quest'):
+        elif cmd == '/' + _('quest'):
             parts = " ".join(params).split(',')
 
             if len(parts) == 3:
@@ -292,7 +292,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                 self.quests['quests'].append(quest)
                 self.persist_data()
         # Share/comment raid/quest
-        elif cmd == _('/share') or cmd == _('/comment'):
+        elif cmd == '/' + _('share') or cmd == '/' + _('comment'):
             if len(params) >= 2:
                 try:
                     _id = int(params[1].strip())
@@ -308,7 +308,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                             _type = _("raid")
                         elif params[0].strip().lower() == _('q'):
                             _list = self.quests["quests"]
-                            _type = _("quest")
+                            _type = _("research")
                         else:
                             msg = await self.sender.sendMessage(_("Meowth! Invalid command!"))
                             self.delete_messages(msg)
@@ -377,8 +377,16 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                 except:
                     return
         # Help command
-        elif cmd == _('/help'):
-            await self.help(user_msg)
+        elif cmd == '/' + _('help'):
+            if len(params) > 0:
+                await self.help(user_msg, params[0].strip().lower())
+            else:
+                await self.help(user_msg)
+        elif cmd == '/' + _('about'):
+            await self.sender.sendMessage(_("Meowth! That's right!"
+                                            "\n\nI'm a bot that will help you managing your Pokémon GO group! I can report the quests you found, create raid's list for you and some other things."
+                                            "\n\nYou can find my source code at https://github.com/danielsguima/ThePokeGOBot."
+                                            "\n\n*Created by:* @OKakarotoSJC"), parse_mode="markdown")
         # None of the commands
         else:
             if user['id'] != self.master:
@@ -441,45 +449,46 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
         if user_msg['chat']['type'] != 'private':
             self.delete_messages(user_msg, 1)
 
-    async def help(self, user_msg):
+    async def help(self, user_msg, command=""):
+        msg = ""
+
         will_delete = _(
             "\n\n_This message will be automatically deleted in a minute._") if user_msg['chat']['type'] != 'private' else ""
 
-        msg = await self.sender.sendMessage(
-            _("*Commands*"
-              "\n/trainer - set your team and level."
-              "\n`/trainer initial letter/team name/color 30`"
-              "\n/level - update your level but only works after the /trainer command has already been used."
-              "\n`/level 31`"
-              "\n/raid - starts a new raid's list."
-              "\n`/raid level/pokémon (pokédex number or name),place,HH:MM`"
-              "\n/edit - change the time and the Pokémon of a on going raid's list."
-              "\n`/edit raid's ID HH:MM Pokémon name`"
-              "\n/cancel - cancel a on going raid's list or delete a quest."
-              "\n`/cancel r/q raid's/quest's ID`"
-              "\n/end - finish a on going raid's list."
-              "\n`/end raid's ID`"
-              "\n/quest - report a found quest."
-              "\n`/quest task,place,reward`"
-              "\n/share - send a raid's list or quest's report to another group so that both are automatically updated in the groups it was shared to."
-              "\n`/share q/r raid's/quest's ID`"
-              "\n/comment - add informations to a raid's list or quest's report."
-              "\n`/comment q/r raid's/quest's ID comment`"
-              "\n\n*Raid's list*"
-              "\nTo add yourself to the list, just tap the _Yes_ button."
-              "\nIn case there are more people going with you tap the _+1_ for each extra trainer that is going with you."
-              "\nIn case you can no longer go tap the _No_ and your name will be automatically removed."
-              "\n\n*Comments*"
-              "\nOnly those who confirmed that are going to the raid can comment on it."
-              "\nOn quest's report, anyone can comment."
-              "\n\n*Report's duration*"
-              "\nAfter 1 hour and 45 minutes a raid's list is set to ended (time to egg hatching + raid's duration)."
-              "\nAt midnight of each day the quests' reports are deleted."
-              "\n\nAny question, talk to %s %s") % (self.master_username, will_delete),
-            parse_mode="markdown")
+        if command == "":
+            msg = _("*Commands*")
 
-        if user_msg['chat']['type'] != 'private':
-            self.scheduler.event_later(60, ('_delete_help', {'message': msg}))
+            for cmd in self.commands:
+                msg += '\n' + cmd['desc'] + '\n' + cmd['usage']
+
+            msg += _("\n\n*Raid's list*"
+                     "\nTo add yourself to the list, just tap the _Yes_ button."
+                     "\nIn case there are more people going with you tap the _+1_ for each extra trainer that is going with you."
+                     "\nIn case you can no longer go tap the _No_ and your name will be automatically removed."
+                     "\n\n*Comments*"
+                     "\nOnly those who confirmed that are going to the raid can comment on it."
+                     "\nOn quest's report, anyone can comment."
+                     "\n\n*Report's duration*"
+                     "\nAfter 1 hour and 45 minutes a raid's list is set to ended (time to egg hatching + raid's duration)."
+                     "\nAt midnight of each day the quests' reports are deleted."
+                     "\n\nAny question, talk to %s %s") % (self.master_username, will_delete)
+        else:
+            cmd = next(
+                (x for x in self.commands if x['command'] == command), None)
+
+            if cmd != None:
+                msg = _("Meowth! That's how you use the *%s* command!\n\n %s\n%s") % (
+                    command, cmd['desc'], cmd['usage'])
+            else:
+                invalid_msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid command!") % (command), parse_mode="markdown")
+                self.delete_messages(invalid_msg)
+
+        if msg != "":
+            msg = await self.sender.sendMessage(msg, parse_mode="markdown")
+
+            if user_msg['chat']['type'] != 'private':
+                self.scheduler.event_later(
+                    60, ('_delete_help', {'message': msg}))
 
     async def on___delete_bot_messages(self, event):
         await self.bot.deleteMessage(telepot.message_identifier(event['_delete_bot_messages']['delete']))
@@ -672,6 +681,59 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
         self.raids = json.loads(open('data/active_raids.json').read())
         self.trainers = json.loads(open('data/trainers.json').read())
         self.quests = json.loads(open('data/quests.json').read())
+
+        self.commands = [
+            {
+                "command": _("trainer"),
+                "desc": _("/trainer - set your team and level."),
+                "usage": _("`/trainer initial letter/team name/color 30`")
+            },
+            {
+                "command": _("level"),
+                "desc": _("/level - update your level but only works after the /trainer command has already been used."),
+                "usage": _("`/level 31`")
+            },
+            {
+                "command": _("raid"),
+                "desc": _("/raid - starts a new raid's list."),
+                "usage": _("`/raid level/pokémon (pokédex number or name),place,HH:MM`")
+            },
+            {
+                "command": _("edit"),
+                "desc": _("/edit - change the time and the Pokémon of a on going raid's list."),
+                "usage": _("`/edit raid's ID HH:MM Pokémon name`")
+            },
+            {
+                "command": _("cancel"),
+                "desc": _("/cancel - cancel a on going raid's list or delete a quest."),
+                "usage": _("`/cancel r/q raid's/quest's ID`")
+            },
+            {
+                "command": _("end"),
+                "desc": _("/end - finish a on going raid's list."),
+                "usage": _("`/end raid's ID`")
+            },
+            {
+                "command": _("quest"),
+                "desc": _("/quest - report a found quest."),
+                "usage": _("`/quest task,place,reward`")
+            },
+            {
+                "command": _("share"),
+                "desc": _("/share - send a raid's list or quest's report to another group so that both are automatically updated in the groups it was shared to."),
+                "usage": _("`/share q/r raid's/quest's ID`")
+            },
+            {
+                "command": _("comment"),
+                "desc": _("/comment - add informations to a raid's list or quest's report."),
+                "usage": _("`/comment q/r raid's/quest's ID comment`")
+            },
+            {
+                "command": _("about"),
+                "desc": _("/about - show informations about the bot"),
+                "usage": _("`/about`")
+            }
+        ]
 
     def persist_data(self):
         # save active raids
