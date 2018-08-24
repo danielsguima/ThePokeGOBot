@@ -66,14 +66,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
 
                     if pkmn_num in self.curr_raids:
                         try:
-                            now = datetime.now()
-
-                            raid_time = time.strptime(
-                                parts[2].strip(), '%H:%M')
-                            raid_time = datetime(
-                                now.year, now.month, now.day, raid_time.tm_hour, raid_time.tm_min).time()
-
-                            if raid_time >= datetime.now().time():
+                            if self.is_time_in_future(parts[2].strip()):
                                 raid = {
                                     'id': int(self.raids['index']) + 1,
                                     'pokemon': pkmn_name.title(),
@@ -120,32 +113,46 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                 new_time = params[1].strip()
                 new_poke = params[2].strip().title()
 
-                try:
-                    self.pokemon.index(new_poke) + 1
-                    can_be_edit = True
-                except Exception:
-                    try:
-                        if int(new_poke) in self.curr_raids:
+                raid = next(
+                    (x for x in self.raids['raids'] if int(x['id']) == raid_id), None)
+                if raid == None:
+                    msg = await self.sender.sendMessage(_("Meowth! The raid of id *%s* does not exist or has already ended!") % (raid_id))
+                    self.delete_messages(msg)
+                else:
+                    if user['id'] == raid['created_by']['id'] or user['id'] == self.master:
+                        try:
+                            self.pokemon.index(new_poke) + 1
                             can_edit = True
-                            new_poke = self.pokemon[int(new_poke) - 1]
-                        else:
-                            msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid Pokémon!") % (new_poke), parse_mode="markdown")
+                        except Exception:
+                            try:
+                                if int(new_poke) in self.curr_raids:
+                                    can_edit = True
+                                    new_poke = self.pokemon[int(new_poke) - 1]
+                                else:
+                                    msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid Pokémon!") % (new_poke), parse_mode="markdown")
+                                    self.delete_messages(msg)
+                                    can_edit = False
+                            except TypeError:
+                                if new_poke in self.curr_raids:
+                                    can_edit = True
+                                else:
+                                    msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid Pokémon!") % (new_poke), parse_mode="markdown")
+                                    self.delete_messages(msg)
+                                    can_edit = False
+                        
+                        try:
+                            if self.is_time_in_future(new_time):
+                                can_edit = True
+                            else:
+                                msg = await self.sender.sendMessage(_("Meowth! The time must be in the future!"), parse_mode="markdown")
+                                self.delete_messages(msg)
+                                can_edit = False
+                        except Exception:
+                            msg = await self.sender.sendMessage(_("Meowth! The time must be in the format of *HH:MM*!"), parse_mode="markdown")
                             self.delete_messages(msg)
-                    except TypeError:
-                        if new_poke in self.curr_raids:
-                            can_edit = True
-                        else:
-                            msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid Pokémon!") % (new_poke), parse_mode="markdown")
-                            self.delete_messages(msg)
+                            can_edit = False
 
-                if can_edit == True:
-                    raid = next(
-                        (x for x in self.raids['raids'] if int(x['id']) == raid_id), None)
-                    if raid == None:
-                        msg = await self.sender.sendMessage(_("Meowth! The raid of id *%s* does not exist or has already ended!") % (raid_id))
-                        self.delete_messages(msg)
-                    else:
-                        if user['id'] == raid['created_by']['id'] or user['id'] == self.master:
+                        if can_edit == True:
                             raid['start_time'] = new_time
                             raid['pokemon'] = new_poke
                             self.persist_data()
@@ -405,7 +412,11 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
             elif cmd == _('/getraids'):
                 message = _("Current raids\n")
                 for pkmn in self.curr_raids:
-                    message += f"\n*{self.pokemon[pkmn]}*"
+                    try:
+                        pkmn = int(pkmn)
+                        message += f"\n*{self.pokemon[pkmn]}*"
+                    except ValueError:
+                        message += f"\n*{pkmn}*"
 
                 msg = await self.sender.sendMessage(message, parse_mode="markdown")
                 self.delete_messages(msg)
@@ -681,6 +692,16 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
 
     def convert_to_seconds(self, hours, minutes):
         return int((hours * 3600) + (minutes * 60))
+
+    def is_time_in_future(self, time_str):
+        now = datetime.now()
+
+        raid_time = time.strptime(
+            time_str, '%H:%M')
+        raid_time = datetime(
+            now.year, now.month, now.day, raid_time.tm_hour, raid_time.tm_min).time()
+
+        return raid_time >= datetime.now().time()
 
 
 config = json.loads(open('config.json').read())
