@@ -95,7 +95,8 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                             else:
                                 msg = await self.sender.sendMessage(_("Meowth! The time must be in the future!"), parse_mode="markdown")
                                 self.delete_messages(msg)
-                        except Exception:
+                        except Exception as e:
+                            print(e)
                             msg = await self.sender.sendMessage(_("Meowth! The time must be in the format of *HH:MM*!"), parse_mode="markdown")
                             self.delete_messages(msg)
                     else:
@@ -395,15 +396,13 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
         # MASTER commands
         if user['id'] == self.master:
             # Set available raids
-            if cmd == _('/setraids'):
-                self.curr_raids = []
+            if cmd == '/' + _('setraids'):
+                self.curr_raids = self.levels
                 error = False
-                pkmn_names = []
 
                 for pkmn in params[0].split(','):
                     try:
                         num = int(pkmn.strip())
-                        pkmn_names.append(f"*{self.pokemon[num]}*")
                         self.curr_raids.append(num)
                     except:
                         msg = await self.sender.sendMessage(_("Meowth! Input the Pokémon numbers!"))
@@ -412,12 +411,20 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                         break
 
                 if error == False:
-                    names = "\n".join(pkmn_names)
-                    msg = await self.sender.sendMessage(_("Meowth! Current raids set to:\n\n%s") % (names), parse_mode="markdown")
+                    names = ""
+
+                    for num in self.curr_raids:
+                        try:
+                            names += f"\n*{self.pokemon[num - 1]}*"
+                        except:
+                            names += f"\n*{num}*"
+
+                    # names = "\n".join(pkmn_names)
+                    msg = await self.sender.sendMessage(_("Meowth! Current raids set to:\n%s") % (names), parse_mode="markdown")
                     self.delete_messages(msg)
                     self.persist_data()
             # Get available raids
-            elif cmd == _('/getraids'):
+            elif cmd == '/' + _('getraids'):
                 message = _("Current raids\n")
                 for pkmn in self.curr_raids:
                     try:
@@ -429,7 +436,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                 msg = await self.sender.sendMessage(message, parse_mode="markdown")
                 self.delete_messages(msg)
             # Get registered trainers
-            elif cmd == _('/gettrainers'):
+            elif cmd == '/' + _('gettrainers'):
                 message = _("*Trainers*\n")
                 for t in self.trainers:
                     try:
@@ -686,7 +693,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
             {
                 "command": _("trainer"),
                 "desc": _("/trainer - set your team and level."),
-                "usage": _("`/trainer initial letter/team name/color 30`")
+                "usage": _("`/trainer initial letter of team or team name or color 30`")
             },
             {
                 "command": _("level"),
@@ -696,7 +703,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
             {
                 "command": _("raid"),
                 "desc": _("/raid - starts a new raid's list."),
-                "usage": _("`/raid level/pokémon (pokédex number or name),place,HH:MM`")
+                "usage": _("`/raid level or pokémon (pokédex number or name),place,HH:MM`")
             },
             {
                 "command": _("edit"),
@@ -706,7 +713,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
             {
                 "command": _("cancel"),
                 "desc": _("/cancel - cancel a on going raid's list or delete a quest."),
-                "usage": _("`/cancel r/q raid's/quest's ID`")
+                "usage": _("`/cancel r or q raid's or quest's ID`")
             },
             {
                 "command": _("end"),
@@ -721,12 +728,12 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
             {
                 "command": _("share"),
                 "desc": _("/share - send a raid's list or quest's report to another group so that both are automatically updated in the groups it was shared to."),
-                "usage": _("`/share q/r raid's/quest's ID`")
+                "usage": _("`/share q or r raid's or quest's ID`")
             },
             {
                 "command": _("comment"),
                 "desc": _("/comment - add informations to a raid's list or quest's report."),
-                "usage": _("`/comment q/r raid's/quest's ID comment`")
+                "usage": _("`/comment q or r raid's or quest's ID comment`")
             },
             {
                 "command": _("about"),
@@ -763,7 +770,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
         raid_time = datetime(
             now.year, now.month, now.day, raid_time.tm_hour, raid_time.tm_min).time()
 
-        return raid_time >= datetime.now().time()
+        return raid_time >= datetime.now().astimezone(self.timezone).time()
 
 
 config = json.loads(open('config.json').read())
