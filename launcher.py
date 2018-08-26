@@ -383,11 +383,12 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                 await self.help(user_msg, params[0].strip().lower())
             else:
                 await self.help(user_msg)
-        elif cmd == '/' + _('about'):
+        # About command
+        elif cmd == '/' + _('about') or cmd == '/start':
             await self.sender.sendMessage(_("Meowth! That's right!"
-                                            "\n\nI'm a bot that will help you managing your Pokémon GO group! I can report the quests you found, create raid's list for you and some other things."
-                                            "\n\nYou can find my source code at https://github.com/danielsguima/ThePokeGOBot."
-                                            "\n\n*Created by:* @OKakarotoSJC"), parse_mode="markdown")
+                                "\n\nI'm a bot that will help you managing your Pokémon GO group! I can report the quests you found, create raid's list for you and some other things."
+                                "\n\nYou can find my source code at https://github.com/danielsguima/ThePokeGOBot."
+                                "\n\n*Created by:* @OKakarotoSJC"), parse_mode="markdown")
         # None of the commands
         else:
             if user['id'] != self.master:
@@ -429,7 +430,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                 for pkmn in self.curr_raids:
                     try:
                         pkmn = int(pkmn)
-                        message += f"\n*{self.pokemon[pkmn]}*"
+                        message += f"\n*{self.pokemon[pkmn - 1]}*"
                     except ValueError:
                         message += f"\n*{pkmn}*"
 
