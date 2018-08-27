@@ -476,7 +476,13 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
             msg = _("*Commands*")
 
             for cmd in self.commands:
-                msg += '\n' + cmd['desc'] + '\n' + cmd['usage']
+                msg += f"\n{cmd['desc']}\n{cmd['usage']}"
+
+            if user_msg['from']['id'] == self.master:
+                msg += _("\n\n*Master commands*")
+
+                for cmd in self.commands:
+                    msg += f"\n{cmd['desc']}\n{cmd['usage']}"
 
             msg += _("\n\n*Raid's list*"
                      "\nTo add yourself to the list, just tap the _Yes_ button."
@@ -493,12 +499,18 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
             cmd = next(
                 (x for x in self.commands if x['command'] == command), None)
 
+            if cmd == None:
+                if user_msg['from']['id'] == self.master:
+                    cmd = next(
+                        (x for x in self.master_commands if x['command'] == command), None)
+
+                if cmd == None:
+                    invalid_msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid command!") % (command), parse_mode="markdown")
+                    self.delete_messages(invalid_msg)
+
             if cmd != None:
-                msg = _("Meowth! That's how you use the *%s* command!\n\n %s\n%s") % (
+                msg = _("Meowth! That's how you use the *%s* command, master!\n\n %s\n%s") % (
                     command, cmd['desc'], cmd['usage'])
-            else:
-                invalid_msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid command!") % (command), parse_mode="markdown")
-                self.delete_messages(invalid_msg)
 
         if msg != "":
             msg = await self.sender.sendMessage(msg, parse_mode="markdown")
@@ -749,6 +761,29 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                 "command": _("about"),
                 "desc": _("/about - show informations about the bot"),
                 "usage": _("`/about`")
+            }
+        ]
+
+        self.master_commands = [
+            {
+                "command": _("setraids"),
+                "desc": _("/setraids - set the current available raids in the game"),
+                "usage": _("`/setraids pkmn_number,pkmn_number`")
+            },
+            {
+                "command": _("getraids"),
+                "desc": _("/getraids - get the list of current available raids in the game"),
+                "usage": _("`/getraids`")
+            },
+            {
+                "command": _("gettrainers"),
+                "desc": _("/gettrainers - get the list of users that have set their trainer's information"),
+                "usage": _("`/gettrainers`")
+            },
+            {
+                "command": _("setlanguage"),
+                "desc": _("/setlanguage - set the language of the bot"),
+                "usage": _("`/setlanguage language`")
             }
         ]
 

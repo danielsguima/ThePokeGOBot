@@ -25,7 +25,7 @@ A Pokémon GO Telegram bot to manage raids and quests.
 
 ## Localization
 
-### Available languages (as of 28 Aug. 2018)
+### Available languages
 * English
 * Brazilian Portuguese
 
