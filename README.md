@@ -24,6 +24,12 @@ A Pokémon GO Telegram bot to manage raids and quests.
 7. Enjoy the bot!
 
 ## Localization
+
+### Available languages (as of 28 Aug. 2018)
+* English
+* Brazilian Portuguese
+
+### Making your own translation
 It's possible to translate the bot to your own language. To do so, follow this steps:
 
 1. Download [POEdit](https://poedit.net/)
@@ -40,6 +46,7 @@ It's possible to translate the bot to your own language. To do so, follow this s
 |    Command   	|  Permission 	| Function 	| Usage 	|
 |---------------|---------------|-----------|-----------|
 | /help         | All members   |show a help message|`/help`|
+| /about        | All members   |show a message with info about the bot|`/about`|
 | /trainer     	| All members 	|set your team and level|`/trainer initial letter/team name/color 30`|
 | /level       	| All members 	|update your level but only works after the /trainer command has already been used|`/level 31`|
 | /raid        	| All members 	|starts a new raid's list|`/raid level/pokémon (pokédex number or name),place,HH:MM`|
@@ -52,6 +59,7 @@ It's possible to translate the bot to your own language. To do so, follow this s
 | /setraids    	| Master only 	|set the current available raids in the game|`/setraids pkmn_number,pkmn_number`|
 | /getraids    	| Master only 	|get the list of current available raids in the game|`/getraids`|
 | /gettrainers 	| Master only 	|get the list of users that have set their trainer's information|`/gettrainers`|
+| /setlanguage 	| Master only 	|set the language of the bot|`/setlanguage language`|
 
 ** *you must be the one who created it or the master's bot.*
 

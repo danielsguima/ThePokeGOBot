@@ -386,9 +386,9 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
         # About command
         elif cmd == '/' + _('about') or cmd == '/start':
             await self.sender.sendMessage(_("Meowth! That's right!"
-                                "\n\nI'm a bot that will help you managing your Pokémon GO group! I can report the quests you found, create raid's list for you and some other things."
-                                "\n\nYou can find my source code at https://github.com/danielsguima/ThePokeGOBot."
-                                "\n\n*Created by:* @OKakarotoSJC"), parse_mode="markdown")
+                                            "\n\nI'm a bot that will help you managing your Pokémon GO group! I can report the quests you found, create raid's list for you and some other things."
+                                            "\n\nYou can find my source code at https://github.com/danielsguima/ThePokeGOBot."
+                                            "\n\n*Created by:* @OKakarotoSJC"), parse_mode="markdown")
         # None of the commands
         else:
             if user['id'] != self.master:
@@ -453,6 +453,15 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
 
                 msg = await self.sender.sendMessage(message, parse_mode="markdown")
                 self.delete_messages(msg, 10)
+            # Set the bot's language
+            elif cmd == '/' + _('setlanguage'):
+                if len(params) > 0:
+                    language = gettext.translation(
+                        'thepokegobot', localedir='locale', languages=[params[0]])
+                    language.install()
+
+                    msg = await self.sender.sendMessage(_("Language set to *%s* successfully!") % (params[0]), parse_mode="markdown")
+                    self.delete_messages(msg)
 
         if user_msg['chat']['type'] != 'private':
             self.delete_messages(user_msg, 1)
