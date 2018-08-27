@@ -100,7 +100,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                             msg = await self.sender.sendMessage(_("Meowth! The time must be in the format of *HH:MM*!"), parse_mode="markdown")
                             self.delete_messages(msg)
                     else:
-                        msg = await self.sender.sendMessage(_("Meowth! The Pokémon *%s* is not currently in the raids!") % (parts[0].strip().title()), parse_mode="markdown")
+                        msg = await self.sender.sendMessage(_("Meowth! The Pokémon *%s* is not currently in the raids!") % (pkmn_name), parse_mode="markdown")
                         self.delete_messages(msg)
                 except:
                     msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid Pokémon!") % (parts[0].strip().title()), parse_mode="markdown")
