@@ -20,6 +20,7 @@ A Pokémon GO Telegram bot to manage raids and quests.
 - `0` with your timezone (by default it's using GMT +0)
 
 5. Run the bot by using `python launcher.py`
+6. Set the available raids with `/setraids` command
 6. Add the bot to a supergroup and give it administrator rights
 7. Enjoy the bot!
 
@@ -56,7 +57,7 @@ It's possible to translate the bot to your own language. To do so, follow this s
 | /quest       	| All members 	|report a found quest|`/quest task,place,reward`|
 | /share       	| All members 	|send a raid's list or quest's report to another group so that both are automatically updated in the groups it was shared to|`/share r/q raid's/quest's ID`|
 | /comment     	| All members 	|add informations to a raid's list or quest's report|`/comment r/q raid's/quest's ID comment`|
-| /setraids    	| Master only 	|set the current available raids in the game|`/setraids pkmn_number,pkmn_number`|
+| /setraids    	| Master only 	|set the current available raids in the game|`/setraids pokédex number or name, pokédex number or name`|
 | /getraids    	| Master only 	|get the list of current available raids in the game|`/getraids`|
 | /gettrainers 	| Master only 	|get the list of users that have set their trainer's information|`/gettrainers`|
 | /setlanguage 	| Master only 	|set the language of the bot|`/setlanguage language`|

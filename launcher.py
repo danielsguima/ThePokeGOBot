@@ -55,7 +55,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                         pkmn_name = parts[0].strip().title()
                     elif parts[0].strip().title() in self.levels:
                         pkmn_num = parts[0].strip().title()
-                        pkmn_name = pkmn_num
+                        pkmn_name = parts[0].strip().title()
                     else:
                         try:
                             pkmn_num = int(parts[0].strip().title())
@@ -107,94 +107,98 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                     self.delete_messages(msg)
         # Edit the start time of the raid
         elif cmd == '/' + _('edit'):
-            if len(params) == 3:
-                can_edit = False
-
+            if len(params) >= 3:
                 raid_id = int(params[0])
+
                 new_time = params[1].strip()
                 new_poke = params[2].strip().title()
+
+                if len(params) > 3:
+                    new_poke += f" {params[3]}"
 
                 raid = next(
                     (x for x in self.raids['raids'] if int(x['id']) == raid_id), None)
                 if raid == None:
-                    msg = await self.sender.sendMessage(_("Meowth! The raid of id *%s* does not exist or has already ended!") % (raid_id))
+                    msg = await self.sender.sendMessage(_("Meowth! The raid of id *%s* does not exist or has already ended!") % (raid_id), parse_mode="markdown")
                     self.delete_messages(msg)
                 else:
                     if user['id'] == raid['created_by']['id'] or user['id'] == self.master:
                         try:
-                            self.pokemon.index(new_poke) + 1
-                            can_edit = True
-                        except Exception:
-                            try:
-                                if int(new_poke) in self.curr_raids:
-                                    can_edit = True
-                                    new_poke = self.pokemon[int(new_poke) - 1]
-                                else:
-                                    msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid Pokémon!") % (new_poke), parse_mode="markdown")
-                                    self.delete_messages(msg)
-                                    can_edit = False
-                            except TypeError:
-                                if new_poke in self.curr_raids:
-                                    can_edit = True
-                                else:
-                                    msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid Pokémon!") % (new_poke), parse_mode="markdown")
-                                    self.delete_messages(msg)
-                                    can_edit = False
-
-                        try:
-                            if self.is_time_in_future(new_time):
-                                can_edit = True
+                            if new_poke in self.pokemon:
+                                pkmn_num = self.pokemon.index(new_poke) + 1
+                            elif new_poke in self.levels:
+                                pkmn_num = new_poke
                             else:
-                                msg = await self.sender.sendMessage(_("Meowth! The time must be in the future!"), parse_mode="markdown")
+                                try:
+                                    pkmn_num = int(new_poke)
+                                    new_poke = self.pokemon[pkmn_num - 1]
+                                except TypeError:
+                                    msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid Pokémon!") % (parts[0].strip().title()), parse_mode="markdown")
+                                    self.delete_messages(msg)
+                        except:
+                            msg = await self.sender.sendMessage(_("Meowth! *%s* is not a valid Pokémon!") % (parts[0].strip().title()), parse_mode="markdown")
+                            self.delete_messages(msg)
+
+                        if pkmn_num in self.curr_raids:
+                            try:
+                                if self.is_time_in_future(new_time):
+                                    raid['start_time'] = new_time
+                                    raid['pokemon'] = new_poke
+                                    self.persist_data()
+                                    for msg in raid['messages']:
+                                        await self.bot.editMessageText(telepot.message_identifier(msg), self.create_list(raid), reply_markup=self.create_keyboard(raid), parse_mode="markdown")
+                                else:
+                                    msg = await self.sender.sendMessage(_("Meowth! The time must be in the future!"), parse_mode="markdown")
+                                    self.delete_messages(msg)
+                            except Exception:
+                                msg = await self.sender.sendMessage(_("Meowth! The time must be in the format of *HH:MM*!"), parse_mode="markdown")
                                 self.delete_messages(msg)
-                                can_edit = False
-                        except Exception:
-                            msg = await self.sender.sendMessage(_("Meowth! The time must be in the format of *HH:MM*!"), parse_mode="markdown")
+                        else:
+                            msg = await self.sender.sendMessage(_("Meowth! The Pokémon *%s* is not currently in the raids!") % (new_poke), parse_mode="markdown")
                             self.delete_messages(msg)
-                            can_edit = False
-
-                        if can_edit == True:
-                            raid['start_time'] = new_time
-                            raid['pokemon'] = new_poke
-                            self.persist_data()
-                            for msg in raid['messages']:
-                                await self.bot.editMessageText(telepot.message_identifier(msg), self.create_list(raid), reply_markup=self.create_keyboard(raid), parse_mode="markdown")
-        # Cancel/finish active raid
+        # Cancel/finish active raid or quest
         elif cmd == '/' + _('cancel') or cmd == '/' + _('end'):
-            if len(params) == 2:
-                if params[0] == _('r'):
-                    command = _('cancel') if cmd == _('/cancel') else _('end')
-                    raid_id = params[1].strip()
+            raid_id = 0
 
-                    if raid_id:
-                        raid = next((x for x in self.raids['raids'] if int(
-                            x['id']) == int(raid_id)), None)
-                        if raid == None:
-                            msg = await self.sender.sendMessage(_("Meowth! The raid of id *%s* does not exist or has already ended!") % (raid_id), parse_mode="markdown")
-                            self.delete_messages(msg)
-                        else:
-                            if raid['created_by']['id'] == user['id'] or user['id'] == self.master:
-                                raid['status'] = _('canceled') if command == _(
-                                    'cancel') else _('ended')
-                                self.persist_data()
-                                for msg in raid['messages']:
-                                    await self.bot.editMessageText(telepot.message_identifier(msg), self.create_list(raid), reply_markup=None, parse_mode="markdown")
-                elif params[0] == _('q') and cmd == _('/cancel'):
-                    quest_id = params[1].strip()
+            if len(params) >= 1:
+                if cmd == _('/end'):
+                    raid_id = params[0].strip()
+                else:
+                    if params[0] == _('r'):
+                        command = _('cancel') if cmd == _(
+                            '/cancel') else _('end')
+                        raid_id = params[1].strip()
+                    elif params[0] == _('q') and cmd == _('/cancel'):
+                        quest_id = params[1].strip()
 
-                    if quest_id:
-                        quest = next((x for x in self.quests['quests'] if int(
-                            x['id']) == int(quest_id)), None)
+                        if quest_id:
+                            quest = next((x for x in self.quests['quests'] if int(
+                                x['id']) == int(quest_id)), None)
 
-                        if quest == None:
-                            msg = await self.sender.sendMessage(_("Meowth! The quest of id *%s* does not exist!") % (raid_id), parse_mode="markdown")
-                            self.delete_messages(msg)
-                        else:
-                            if quest['created_by']['id'] == user['id'] or user['id'] == self.master:
-                                quest['status'] = _('canceled')
-                                self.persist_data()
-                                for msg in quest['messages']:
-                                    self.delete_messages(msg, 0)
+                            if quest == None:
+                                msg = await self.sender.sendMessage(_("Meowth! The quest of id *%s* does not exist!") % (quest_id), parse_mode="markdown")
+                                self.delete_messages(msg)
+                            else:
+                                if quest['created_by']['id'] == user['id'] or user['id'] == self.master:
+                                    await self.delete_data(None, self.quests['quests'], quest_id, delete_message=True)
+                                    # for msg in quest['messages']:
+                                    #     self.delete_messages(msg, 0)
+
+                if raid_id != 0:
+                    raid = next((x for x in self.raids['raids'] if int(
+                        x['id']) == int(raid_id)), None)
+                    if raid == None:
+                        msg = await self.sender.sendMessage(_("Meowth! The raid of id *%s* does not exist or has already ended!") % (raid_id), parse_mode="markdown")
+                        self.delete_messages(msg)
+                    else:
+                        if raid['created_by']['id'] == user['id'] or user['id'] == self.master:
+                            raid['status'] = _('canceled') if command == _(
+                                'cancel') else _('ended')
+                            # self.persist_data()
+                            # for msg in raid['messages']:
+                            #     await self.bot.editMessageText(telepot.message_identifier(msg), self.create_list(raid), reply_markup=None, parse_mode="markdown")
+
+                            await self.delete_data(None, self.raids['raids'], raid_id, raid['status'])
         # Set trainer informations
         elif cmd == '/' + _('trainer'):
             teams = [['valor', _('red'), 'v', ':fire:'], [
@@ -404,14 +408,29 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                 for pkmn in params[0].split(','):
                     try:
                         num = int(pkmn.strip())
-                        self.curr_raids.append(num)
+
+                        try:
+                            self.pokemon[num - 1]
+                        except:
+                            msg = await self.sender.sendMessage(_("Meowth! Input valid Pokémon!"))
+                            self.delete_messages(msg)
+                            error = True
+                            break
                     except:
-                        msg = await self.sender.sendMessage(_("Meowth! Input the Pokémon numbers!"))
-                        self.delete_messages(msg)
-                        error = True
-                        break
+                        try:
+                            num = self.pokemon.index(pkmn.strip().title()) + 1
+                        except:
+                            msg = await self.sender.sendMessage(_("Meowth! Input valid Pokémon!"))
+                            self.delete_messages(msg)
+                            error = True
+                            break
+
+                    if error == False:
+                        self.curr_raids.append(num)
 
                 if error == False:
+                    self.persist_data()
+
                     names = ""
 
                     for num in self.curr_raids:
@@ -420,10 +439,8 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                         except:
                             names += f"\n*{num}*"
 
-                    # names = "\n".join(pkmn_names)
                     msg = await self.sender.sendMessage(_("Meowth! Current raids set to:\n%s") % (names), parse_mode="markdown")
                     self.delete_messages(msg)
-                    self.persist_data()
             # Get available raids
             elif cmd == '/' + _('getraids'):
                 message = _("Current raids\n")
@@ -531,17 +548,20 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
     async def on___delete_help(self, event):
         await self.bot.deleteMessage(telepot.message_identifier(event['_delete_help']['message']))
 
-    async def delete_data(self, event, _list, _id):
+    async def delete_data(self, event, _list, _id, status="", delete_message=False):
         obj = next((x for x in _list if int(x['id']) == int(_id)), None)
 
         if obj != None:
-            obj['status'] = _('ended')
+            obj['status'] = _('ended') if status == '' else status
 
             for msg in obj['messages']:
-                if 'status' in obj:
-                    await self.bot.editMessageText(telepot.message_identifier(msg), self.create_list(obj), parse_mode="markdown")
+                if delete_message == True:
+                    self.delete_messages(msg, 0)
                 else:
-                    await self.bot.editMessageText(telepot.message_identifier(msg), self.create_quest(obj), parse_mode="markdown")
+                    if 'status' in obj:
+                        await self.bot.editMessageText(telepot.message_identifier(msg), self.create_list(obj), parse_mode="markdown")
+                    else:
+                        await self.bot.editMessageText(telepot.message_identifier(msg), self.create_quest(obj), parse_mode="markdown")
 
             i = 0
             for x in _list:
@@ -768,7 +788,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
             {
                 "command": _("setraids"),
                 "desc": _("/setraids - set the current available raids in the game"),
-                "usage": _("`/setraids pkmn_number,pkmn_number`")
+                "usage": _("`/setraids pokédex number or name, pokédex number or name`")
             },
             {
                 "command": _("getraids"),
