@@ -181,8 +181,6 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                             else:
                                 if quest['created_by']['id'] == user['id'] or user['id'] == self.master:
                                     await self.delete_data(None, self.quests['quests'], quest_id, delete_message=True)
-                                    # for msg in quest['messages']:
-                                    #     self.delete_messages(msg, 0)
 
                 if raid_id != 0:
                     raid = next((x for x in self.raids['raids'] if int(
@@ -194,9 +192,6 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                         if raid['created_by']['id'] == user['id'] or user['id'] == self.master:
                             raid['status'] = _('canceled') if command == _(
                                 'cancel') else _('ended')
-                            # self.persist_data()
-                            # for msg in raid['messages']:
-                            #     await self.bot.editMessageText(telepot.message_identifier(msg), self.create_list(raid), reply_markup=None, parse_mode="markdown")
 
                             await self.delete_data(None, self.raids['raids'], raid_id, raid['status'])
         # Set trainer informations
