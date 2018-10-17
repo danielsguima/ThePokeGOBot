@@ -161,12 +161,12 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
             raid_id = 0
 
             if len(params) >= 1:
+                command = _('cancel') if cmd == _('/cancel') else _('end')
+
                 if cmd == _('/end'):
                     raid_id = params[0].strip()
                 else:
                     if params[0] == _('r'):
-                        command = _('cancel') if cmd == _(
-                            '/cancel') else _('end')
                         raid_id = params[1].strip()
                     elif params[0] == _('q') and cmd == _('/cancel'):
                         quest_id = params[1].strip()
