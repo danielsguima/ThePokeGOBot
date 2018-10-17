@@ -1,3 +1,4 @@
+import re
 import gettext
 import sys
 import asyncio
@@ -400,9 +401,10 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                 self.curr_raids = self.levels
                 error = False
 
-                for pkmn in params[0].split(','):
+                pkmn_list = re.sub(' +', '',' '.join(params)).split(',')
+                for pkmn in pkmn_list:
                     try:
-                        num = int(pkmn.strip())
+                        num = int(pkmn)
 
                         try:
                             self.pokemon[num - 1]
@@ -413,7 +415,7 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                             break
                     except:
                         try:
-                            num = self.pokemon.index(pkmn.strip().title()) + 1
+                            num = self.pokemon.index(pkmn.title()) + 1
                         except:
                             msg = await self.sender.sendMessage(_("Meowth! Input valid Pokémon!"))
                             self.delete_messages(msg)
