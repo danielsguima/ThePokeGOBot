@@ -35,14 +35,14 @@ It's possible to translate the bot to your own language. To do so, follow this s
 
 1. Download [POEdit](https://poedit.net/)
 2. Open the file `launcher.py.pot` with POEdit
-3. Click on `Create new translation` and choose the desided language
-4. Translate each of the bot's sentence
+3. Click on `Create new translation` and choose the desired language
+4. Translate each of the bot's sentences
 5. Save the file and place it inside `locale`, following the pattern of the `locale\en` folder
 6. Change the `config.json` file by replacing the `language` parameter to the name of the folder you just created on the step above
 7. Start the bot
 
 ## Commands
-*This are the commands when using the English version of the bot. You can change them (or not) by translating the bot to your own language.*
+*These are the commands when using the English version of the bot. You can change them (or not) by translating the bot to your own language.*
 
 |    Command   	|  Permission 	| Function 	| Usage 	|
 |---------------|---------------|-----------|-----------|
