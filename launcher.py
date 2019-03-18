@@ -587,7 +587,8 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                 if user == None:
                     raid['going'].append({
                         "user": msg['from'],
-                        "count": 0
+                        "count": 0,
+                        "checkin": False
                     })
                 else:
                     return
@@ -605,16 +606,26 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
                             i = i + 1
                 else:
                     return
-            else:
-                user = next((x for x in raid['going'] if int(
-                    x['user']['id']) == int(msg['from']['id'])), None)
-
+            elif response == "+1":
                 if user != None:
                     user['count'] += 1
                 else:
                     raid['going'].append({
                         "user": msg['from'],
-                        "count": 1
+                        "count": 1,
+                        "checkin": False
+                    })
+            else:
+                if user != None:
+                    if user['checkin'] == True:
+                        user['checkin'] = False
+                    else:
+                        user['checkin'] = True
+                else:
+                    raid['going'].append({
+                        "user": msg['from'],
+                        "count": 0,
+                        "checkin": True
                     })
 
             raid_keyboard = self.create_keyboard(raid)
@@ -644,9 +655,9 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
     def create_keyboard(self, raid):
         return InlineKeyboardMarkup(inline_keyboard=[
             [InlineKeyboardButton(text=_('Yes'), callback_data=f"{raid['id']},yes"),
-             InlineKeyboardButton(
-                 text=_('No'), callback_data=f"{raid['id']},no"),
-             InlineKeyboardButton(text='+1', callback_data=f"{raid['id']},+1")]
+             InlineKeyboardButton(text=_('No'), callback_data=f"{raid['id']},no"),
+             InlineKeyboardButton(text='+1', callback_data=f"{raid['id']},+1"),
+             InlineKeyboardButton(text=_('I\'m here'), callback_data=f"{raid['id']},here")]
         ])
 
     def create_quest(self, quest):
@@ -690,6 +701,9 @@ class ThePokeGOBot(telepot.aio.helper.ChatHandler):
 
                 if x['count'] > 0:
                     message += f" (+{x['count']})"
+
+                if x['checkin'] == True:
+                    message += f" {emoji.emojize('✔️')}"
 
             if len(raid['comments']) > 0:
                 message += _("\n\n*Comments:*")
